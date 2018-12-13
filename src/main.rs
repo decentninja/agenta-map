@@ -17,16 +17,10 @@ where E: TryFrom<Element> + web::INode,
     element
 }
 
-fn log(text: &str) {
-    let node = document().create_text_node(text);
-    document().body().unwrap().append_child(&node);
-}
-
 #[derive(Default)]
 struct State {
     x: f64, 
     y: f64,
-    zoom: f64,
     kind: Kind
 }
 
@@ -50,10 +44,6 @@ impl std::default::Default for Kind {
 
 fn main() {
     let canvas = create::<CanvasElement>("canvas", true);
-    let canvas_width = 500;
-    let canvas_height = 500;
-    canvas.set_width(canvas_width);
-    canvas.set_height(canvas_height);
     let image = create::<ImageElement>("img", false);
     image.set_src("Agenta2.png");
     let ctx = canvas.get_context::<CanvasRenderingContext2d>().unwrap();
@@ -90,13 +80,14 @@ fn main() {
     };
     let mouse_move = {
         let state = state.clone();
+        let canvas = canvas.clone();
         move |x: f64, y: f64| {
             let mut state = state.borrow_mut();
             if state.kind == Kind::Dragged {
                 let image_width = image.width() as f64;
                 let image_height = image.height() as f64;;
-                let canvas_width = canvas_width as f64;
-                let canvas_height = canvas_height as f64;
+                let canvas_width = canvas.width() as f64;
+                let canvas_height = canvas.height() as f64;
                 state.x += x;
                 if state.x < -(image_width - canvas_width) {
                     state.x += image_width;
@@ -108,18 +99,26 @@ fn main() {
                 if state.y < -(image_height - canvas_height) {
                     state.y += image_height;
                 }
-                if state.x > image_height {
+                if state.y > image_height {
                     state.y -= image_height;
                 }
             }
         }
     };
     js!{ @(no_return)
+        document.body.style.margin = 0;
+    }
+    js!{ @(no_return)
+        let canvas = @{canvas};
         function update(dt) {
             @{update}(dt);
             window.requestAnimationFrame(update);
         }
-        let canvas = @{canvas};
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            update(0);
+        }
         canvas.addEventListener("mousedown", (e) => {
             @{mouse_down}();
         });
@@ -129,6 +128,7 @@ fn main() {
         canvas.addEventListener("mousemove", (e) => {
             @{mouse_move}(e.movementX, e.movementY);
         });
-        update(0);
+        window.addEventListener("resize", resize);
+        resize();
     }
 }
