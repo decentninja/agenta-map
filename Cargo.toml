@@ -1,0 +1,10 @@
+[package]
+name = "agenta_map"
+version = "0.1.0"
+authors = ["alinn"]
+edition = "2018"
+
+[dependencies]
+stdweb = "0.4.10"
+yew = { git = "https://github.com/DenisKolodin/yew" }
+cargo-expand = "0.3.20"
