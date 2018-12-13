@@ -1,5 +1,5 @@
 #![feature(uniform_paths)]
-#![recursion_limit="128"]
+#![recursion_limit="512"]
 #[macro_use]
 extern crate stdweb;
 use stdweb::{unstable::{TryInto, TryFrom}, web::{self, CanvasRenderingContext2d, document, Element, INode, html_element::*}};
@@ -26,19 +26,13 @@ struct State {
 
 #[derive(PartialEq)]
 enum Kind {
-    Released {
-        dx: f64,
-        dy: f64,
-    },
+    Released,
     Dragged,
 }
 
 impl std::default::Default for Kind {
     fn default() -> Self {
-        Kind::Released {
-            dx: 0.,
-            dy: 0.,
-        }
+        Kind::Released
     }
 }
 
@@ -72,10 +66,7 @@ fn main() {
         let state = state.clone();
         move || {
             let mut state = state.borrow_mut();
-            state.kind = Kind::Released {
-                dx: 0.,
-                dy: 0.,
-            }
+            state.kind = Kind::Released;
         }
     };
     let mouse_move = {
@@ -123,10 +114,13 @@ fn main() {
             @{mouse_down}();
         });
         canvas.addEventListener("mouseup", (e) => {
-            @{mouse_up}();
+            @{mouse_up.clone()}();
         });
         canvas.addEventListener("mousemove", (e) => {
             @{mouse_move}(e.movementX, e.movementY);
+        });
+        canvas.addEventListener("mouseout", (e) => {
+            @{mouse_up}();
         });
         window.addEventListener("resize", resize);
         resize();
