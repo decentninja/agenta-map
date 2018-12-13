@@ -1,5 +1,5 @@
 #![feature(uniform_paths)]
-#![recursion_limit="128"]
+#![recursion_limit="256"]
 #[macro_use]
 extern crate stdweb;
 use stdweb::{unstable::{TryInto, TryFrom}, web::{self, CanvasRenderingContext2d, document, Element, INode, html_element::*}};
@@ -27,17 +27,17 @@ struct State {
 #[derive(PartialEq)]
 enum Kind {
     Released {
-        dx: f64,
-        dy: f64,
+        inertia: (f64, f64),
     },
-    Dragged,
+    Dragged {
+        last_move: (f64, f64),
+    }
 }
 
 impl std::default::Default for Kind {
     fn default() -> Self {
         Kind::Released {
-            dx: 0.,
-            dy: 0.,
+            inertia: (0., 0.),
         }
     }
 }
@@ -65,7 +65,9 @@ fn main() {
         let state = state.clone();
         move || {
             let mut state = state.borrow_mut();
-            state.kind = Kind::Dragged;
+            state.kind = Kind::Dragged {
+                last_move: (0., 0.)
+            };
         }
     };
     let mouse_up = {
@@ -73,8 +75,7 @@ fn main() {
         move || {
             let mut state = state.borrow_mut();
             state.kind = Kind::Released {
-                dx: 0.,
-                dy: 0.,
+                inertia: (0.,0.),
             }
         }
     };
@@ -83,11 +84,12 @@ fn main() {
         let canvas = canvas.clone();
         move |x: f64, y: f64| {
             let mut state = state.borrow_mut();
-            if state.kind == Kind::Dragged {
+            if let Kind::Dragged { .. } = state.kind {
                 let image_width = image.width() as f64;
                 let image_height = image.height() as f64;;
                 let canvas_width = canvas.width() as f64;
                 let canvas_height = canvas.height() as f64;
+                let orig = (state.x, state.y);
                 state.x += x;
                 if state.x < -(image_width - canvas_width) {
                     state.x += image_width;
@@ -102,6 +104,9 @@ fn main() {
                 if state.y > image_height {
                     state.y -= image_height;
                 }
+                state.kind = Kind::Dragged {
+                    last_move: (orig.0 - state.x, orig.1 - state.y)
+                };
             }
         }
     };
@@ -123,6 +128,7 @@ fn main() {
             @{mouse_down}();
         });
         canvas.addEventListener("mouseup", (e) => {
+            console.log(e);
             @{mouse_up}();
         });
         canvas.addEventListener("mousemove", (e) => {
