@@ -17,23 +17,26 @@ where E: TryFrom<Element> + web::INode,
     element
 }
 
-#[derive(Default)]
 struct State {
     x: f64, 
     y: f64,
     kind: Kind
 }
 
+impl std::default::Default for State {
+    fn default() -> Self {
+        State {
+            x: 0.,
+            y: 0.,
+            kind: Kind::Released
+        }
+    }
+}
+
 #[derive(PartialEq)]
 enum Kind {
     Released,
     Dragged,
-}
-
-impl std::default::Default for Kind {
-    fn default() -> Self {
-        Kind::Released
-    }
 }
 
 fn main() {
@@ -98,6 +101,7 @@ fn main() {
     };
     js!{ @(no_return)
         document.body.style.margin = 0;
+        document.body.style.overflow = "hidden";
     }
     js!{ @(no_return)
         let canvas = @{canvas};
