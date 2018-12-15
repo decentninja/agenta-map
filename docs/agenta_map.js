@@ -547,9 +547,6 @@ Module.STDWEB_PRIVATE.acquire_tmp = function( dummy ) {
             "__extjs_89611721005b3de331324f19bedec5df179862e4": function($0) {
                 var o = Module.STDWEB_PRIVATE.acquire_js_reference( $0 );return (o instanceof CanvasRenderingContext2D) | 0;
             },
-            "__extjs_9a5480d0ac5ce27241c56a317ff1b22de9476052": function() {
-                document.body.style.margin = 0 ; let legend = document.createElement ("img"); legend.src = "legend.png" ; legend.style.position = "absolute" ; legend.style.right = 0 ; legend.style.bottom = 0 ; legend.style.margin = "30px" ; legend.style ["pointer-events"]= "none" ; document.body.appendChild (legend); document.body.style.overflow = "hidden" ;
-            },
             "__extjs_9f22d4ca7bc938409787341b7db181f8dd41e6df": function($0) {
                 Module.STDWEB_PRIVATE.increment_refcount( $0 );
             },
@@ -570,6 +567,9 @@ Module.STDWEB_PRIVATE.acquire_tmp = function( dummy ) {
             },
             "__extjs_db0226ae1bbecd407e9880ee28ddc70fc3322d9c": function($0) {
                 $0 = Module.STDWEB_PRIVATE.to_js($0);Module.STDWEB_PRIVATE.unregister_raw_value (($0));
+            },
+            "__extjs_dcf47391e4110a9e43435af7263a557acf224621": function() {
+                console.log ("version: 1"); document.body.style.margin = 0 ; let legend = document.createElement ("img"); legend.src = "legend.png" ; legend.style.position = "absolute" ; legend.style.right = 0 ; legend.style.bottom = 0 ; legend.style.margin = "30px" ; legend.style ["pointer-events"]= "none" ; document.body.appendChild (legend); document.body.style.overflow = "hidden" ;
             },
             "__extjs_ea616dc5ba4767572f03b776a1fb421c8b84a57e": function($0) {
                 var r = Module.STDWEB_PRIVATE.acquire_js_reference( $0 );return (r instanceof DOMException) && (r.name === "IndexSizeError");

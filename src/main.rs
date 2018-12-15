@@ -102,6 +102,7 @@ fn main() {
         }
     };
     js!{ @(no_return)
+        console.log("version: 1");
         document.body.style.margin = 0;
         let legend = document.createElement("img");
         legend.src = "legend.png";
