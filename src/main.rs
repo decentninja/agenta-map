@@ -27,7 +27,9 @@ struct State {
 #[derive(PartialEq)]
 enum Kind {
     Released,
-    Dragged,
+    Dragged {
+        start: (f64, f64)
+    },
 }
 
 impl std::default::Default for Kind {
@@ -57,9 +59,9 @@ fn main() {
     };
     let mouse_down = {
         let state = state.clone();
-        move || {
+        move |x: f64, y: f64| {
             let mut state = state.borrow_mut();
-            state.kind = Kind::Dragged;
+            state.kind = Kind::Dragged { start: (x - state.x, y - state.y) };
         }
     };
     let mouse_up = {
@@ -74,19 +76,19 @@ fn main() {
         let canvas = canvas.clone();
         move |x: f64, y: f64| {
             let mut state = state.borrow_mut();
-            if state.kind == Kind::Dragged {
+            if let Kind::Dragged { start } = state.kind {
                 let image_width = image.width() as f64;
                 let image_height = image.height() as f64;;
                 let canvas_width = canvas.width() as f64;
                 let canvas_height = canvas.height() as f64;
-                state.x += x;
+                state.x = x - start.0;
                 if state.x < -(image_width - canvas_width) {
                     state.x += image_width;
                 }
                 if state.x > image_width {
                     state.x -= image_width;
                 }
-                state.y += y;
+                state.y = y - start.1;
                 if state.y < -(image_height - canvas_height) {
                     state.y += image_height;
                 }
@@ -109,6 +111,7 @@ fn main() {
     }
     js!{ @(no_return)
         let canvas = @{canvas};
+        canvas.style.cursor = "grab";
         function update(dt) {
             @{update}(dt);
             window.requestAnimationFrame(update);
@@ -118,17 +121,33 @@ fn main() {
             canvas.height = window.innerHeight;
             update(0);
         }
+        let mouse_down = @{mouse_down};
+        let mouse_up = @{mouse_up};
+        let mouse_move = @{mouse_move};
         canvas.addEventListener("mousedown", (e) => {
-            @{mouse_down}();
+            console.log("down", e.screenX, e.screenY);
+            mouse_down(e.screenX, e.screenY);
+            canvas.style.cursor = "grabbing";
         });
         canvas.addEventListener("mouseup", (e) => {
-            @{mouse_up.clone()}();
+            mouse_up();
+            canvas.style.cursor = "grab";
         });
         canvas.addEventListener("mousemove", (e) => {
-            @{mouse_move}(e.movementX, e.movementY);
+            //console.log("move", e.screenX, e.screenY);
+            mouse_move(e.screenX, e.screenY);
+        });
+        canvas.addEventListener("touchstart", (e) => {
+            mouse_down(e.touches[0].screenX, e.touches[0].screenY);
+        });
+        canvas.addEventListener("touchend", (e) => {
+            mouse_up();
+        });
+        canvas.addEventListener("touchmove", (e) => {
+            mouse_move(e.touches[0].screenX, e.touches[0].screenY);
         });
         canvas.addEventListener("mouseout", (e) => {
-            @{mouse_up}();
+            mouse_up();
         });
         window.addEventListener("resize", resize);
         resize();
