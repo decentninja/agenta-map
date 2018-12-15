@@ -541,6 +541,9 @@ Module.STDWEB_PRIVATE.acquire_tmp = function( dummy ) {
             "__extjs_8878b5fa0fa47aa5a1b525a2e37fef51440640ff": function($0) {
                 var o = Module.STDWEB_PRIVATE.acquire_js_reference( $0 );return (o instanceof TypeError) | 0;
             },
+            "__extjs_88fccefa9b43e48724906b737eb025885135cde6": function($0, $1, $2, $3, $4) {
+                $0 = Module.STDWEB_PRIVATE.to_js($0);$1 = Module.STDWEB_PRIVATE.to_js($1);$2 = Module.STDWEB_PRIVATE.to_js($2);$3 = Module.STDWEB_PRIVATE.to_js($3);$4 = Module.STDWEB_PRIVATE.to_js($4);let canvas = ($0); canvas.style.cursor = "grab" ; function update (dt){($1)(dt); window.requestAnimationFrame (update);}function resize (){canvas.width = window.innerWidth ; canvas.height = window.innerHeight ; update (0);}let mouse_down = ($2); let mouse_up = ($3); let mouse_move = ($4); canvas.addEventListener ("mousedown" , (e)=> {canvas.style.cursor = "grabbing" ;}); canvas.addEventListener ("mouseup" , (e)=> {mouse_up (); canvas.style.cursor = "grab" ;}); canvas.addEventListener ("mousemove" , (e)=> {mouse_move (e.screenX , e.screenY);}); canvas.addEventListener ("touchstart" , (e)=> {mouse_down (e.touches [0]. screenX , e.touches [0]. screenY);}); canvas.addEventListener ("touchend" , (e)=> {mouse_up ();}); canvas.addEventListener ("touchmove" , (e)=> {mouse_move (e.touches [0]. screenX , e.touches [0]. screenY); e.preventDefault ();}); canvas.addEventListener ("mouseout" , (e)=> {mouse_up ();}); window.addEventListener ("resize" , resize); resize ();
+            },
             "__extjs_89611721005b3de331324f19bedec5df179862e4": function($0) {
                 var o = Module.STDWEB_PRIVATE.acquire_js_reference( $0 );return (o instanceof CanvasRenderingContext2D) | 0;
             },
@@ -558,9 +561,6 @@ Module.STDWEB_PRIVATE.acquire_tmp = function( dummy ) {
             },
             "__extjs_a72c1c3711c212b05f52b8743debbfb8f27e1926": function($0, $1) {
                 $1 = Module.STDWEB_PRIVATE.to_js($1);Module.STDWEB_PRIVATE.from_js($0, (function(){return ($1). height ;})());
-            },
-            "__extjs_b0716486c3ce7c5135563ddc703d0cf17dc0d320": function($0, $1, $2, $3, $4) {
-                $0 = Module.STDWEB_PRIVATE.to_js($0);$1 = Module.STDWEB_PRIVATE.to_js($1);$2 = Module.STDWEB_PRIVATE.to_js($2);$3 = Module.STDWEB_PRIVATE.to_js($3);$4 = Module.STDWEB_PRIVATE.to_js($4);let canvas = ($0); canvas.style.cursor = "grab" ; function update (dt){($1)(dt); window.requestAnimationFrame (update);}function resize (){canvas.width = window.innerWidth ; canvas.height = window.innerHeight ; update (0);}let mouse_down = ($2); let mouse_up = ($3); let mouse_move = ($4); canvas.addEventListener ("mousedown" , (e)=> {canvas.style.cursor = "grabbing" ;}); canvas.addEventListener ("mouseup" , (e)=> {mouse_up (); canvas.style.cursor = "grab" ;}); canvas.addEventListener ("mousemove" , (e)=> {mouse_move (e.screenX , e.screenY);}); canvas.addEventListener ("touchstart" , (e)=> {mouse_down (e.touches [0]. screenX , e.touches [0]. screenY);}); canvas.addEventListener ("touchend" , (e)=> {mouse_up ();}); canvas.addEventListener ("touchmove" , (e)=> {mouse_move (e.touches [0]. screenX , e.touches [0]. screenY);}); canvas.addEventListener ("mouseout" , (e)=> {mouse_up ();}); window.addEventListener ("resize" , resize); resize ();
             },
             "__extjs_bf0e892d0bc47772f414e3f246754d2d86c9528d": function($0, $1, $2, $3, $4) {
                 $1 = Module.STDWEB_PRIVATE.to_js($1);$2 = Module.STDWEB_PRIVATE.to_js($2);$3 = Module.STDWEB_PRIVATE.to_js($3);$4 = Module.STDWEB_PRIVATE.to_js($4);Module.STDWEB_PRIVATE.from_js($0, (function(){try {($1). drawImage (($2), ($3), ($4)); return {success : true};}catch (error){return {error : error , success : false};}})());

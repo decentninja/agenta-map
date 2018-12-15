@@ -146,6 +146,7 @@ fn main() {
         });
         canvas.addEventListener("touchmove", (e) => {
             mouse_move(e.touches[0].screenX, e.touches[0].screenY);
+            e.preventDefault();
         });
         canvas.addEventListener("mouseout", (e) => {
             mouse_up();
