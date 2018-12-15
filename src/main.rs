@@ -131,6 +131,7 @@ fn main() {
         let mouse_move = @{mouse_move};
         canvas.addEventListener("mousedown", (e) => {
             canvas.style.cursor = "grabbing";
+            mouse_down(e.screenX, e.screenY);
         });
         canvas.addEventListener("mouseup", (e) => {
             mouse_up();
@@ -138,6 +139,7 @@ fn main() {
         });
         canvas.addEventListener("mousemove", (e) => {
             mouse_move(e.screenX, e.screenY);
+            console.log("moved");
         });
         canvas.addEventListener("touchstart", (e) => {
             mouse_down(e.touches[0].screenX, e.touches[0].screenY);

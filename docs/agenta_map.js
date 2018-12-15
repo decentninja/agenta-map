@@ -514,6 +514,9 @@ Module.STDWEB_PRIVATE.acquire_tmp = function( dummy ) {
             "__extjs_20ad46df0c338e20bd94061cd656da90c3ba5ba5": function($0, $1) {
                 $1 = Module.STDWEB_PRIVATE.to_js($1);Module.STDWEB_PRIVATE.from_js($0, (function(){return ($1). getContext ("2d");})());
             },
+            "__extjs_346806e643b49bda94d9dc767d6f9561103ecab4": function($0, $1, $2, $3, $4) {
+                $0 = Module.STDWEB_PRIVATE.to_js($0);$1 = Module.STDWEB_PRIVATE.to_js($1);$2 = Module.STDWEB_PRIVATE.to_js($2);$3 = Module.STDWEB_PRIVATE.to_js($3);$4 = Module.STDWEB_PRIVATE.to_js($4);let canvas = ($0); canvas.style.cursor = "grab" ; function update (dt){($1)(dt); window.requestAnimationFrame (update);}function resize (){canvas.width = window.innerWidth ; canvas.height = window.innerHeight ; update (0);}let mouse_down = ($2); let mouse_up = ($3); let mouse_move = ($4); canvas.addEventListener ("mousedown" , (e)=> {canvas.style.cursor = "grabbing" ; mouse_down (e.screenX , e.screenY);}); canvas.addEventListener ("mouseup" , (e)=> {mouse_up (); canvas.style.cursor = "grab" ;}); canvas.addEventListener ("mousemove" , (e)=> {mouse_move (e.screenX , e.screenY); console.log ("moved");}); canvas.addEventListener ("touchstart" , (e)=> {mouse_down (e.touches [0]. screenX , e.touches [0]. screenY);}); canvas.addEventListener ("touchend" , (e)=> {mouse_up ();}); canvas.addEventListener ("touchmove" , (e)=> {mouse_move (e.touches [0]. screenX , e.touches [0]. screenY); e.preventDefault ();}); canvas.addEventListener ("mouseout" , (e)=> {mouse_up ();}); window.addEventListener ("resize" , resize); resize ();
+            },
             "__extjs_352943ae98b2eeb817e36305c3531d61c7e1a52b": function($0) {
                 var o = Module.STDWEB_PRIVATE.acquire_js_reference( $0 );return (o instanceof Element) | 0;
             },
@@ -540,9 +543,6 @@ Module.STDWEB_PRIVATE.acquire_tmp = function( dummy ) {
             },
             "__extjs_8878b5fa0fa47aa5a1b525a2e37fef51440640ff": function($0) {
                 var o = Module.STDWEB_PRIVATE.acquire_js_reference( $0 );return (o instanceof TypeError) | 0;
-            },
-            "__extjs_88fccefa9b43e48724906b737eb025885135cde6": function($0, $1, $2, $3, $4) {
-                $0 = Module.STDWEB_PRIVATE.to_js($0);$1 = Module.STDWEB_PRIVATE.to_js($1);$2 = Module.STDWEB_PRIVATE.to_js($2);$3 = Module.STDWEB_PRIVATE.to_js($3);$4 = Module.STDWEB_PRIVATE.to_js($4);let canvas = ($0); canvas.style.cursor = "grab" ; function update (dt){($1)(dt); window.requestAnimationFrame (update);}function resize (){canvas.width = window.innerWidth ; canvas.height = window.innerHeight ; update (0);}let mouse_down = ($2); let mouse_up = ($3); let mouse_move = ($4); canvas.addEventListener ("mousedown" , (e)=> {canvas.style.cursor = "grabbing" ;}); canvas.addEventListener ("mouseup" , (e)=> {mouse_up (); canvas.style.cursor = "grab" ;}); canvas.addEventListener ("mousemove" , (e)=> {mouse_move (e.screenX , e.screenY);}); canvas.addEventListener ("touchstart" , (e)=> {mouse_down (e.touches [0]. screenX , e.touches [0]. screenY);}); canvas.addEventListener ("touchend" , (e)=> {mouse_up ();}); canvas.addEventListener ("touchmove" , (e)=> {mouse_move (e.touches [0]. screenX , e.touches [0]. screenY); e.preventDefault ();}); canvas.addEventListener ("mouseout" , (e)=> {mouse_up ();}); window.addEventListener ("resize" , resize); resize ();
             },
             "__extjs_89611721005b3de331324f19bedec5df179862e4": function($0) {
                 var o = Module.STDWEB_PRIVATE.acquire_js_reference( $0 );return (o instanceof CanvasRenderingContext2D) | 0;
