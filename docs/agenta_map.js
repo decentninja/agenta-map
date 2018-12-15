@@ -520,17 +520,11 @@ Module.STDWEB_PRIVATE.acquire_tmp = function( dummy ) {
             "__extjs_4cc2b2ed53586a2bd32ca2206724307e82bb32ff": function($0, $1) {
                 $0 = Module.STDWEB_PRIVATE.to_js($0);$1 = Module.STDWEB_PRIVATE.to_js($1);($0). appendChild (($1));
             },
-            "__extjs_4fe9b16b11b1a72ce984d2383942d3760e948f34": function() {
-                document.body.style.margin = 0 ; document.body.style.overflow = "hidden" ;
-            },
             "__extjs_5984245de8b6ef88f693ba2383ebf3c2f9718c6c": function($0) {
                 var o = Module.STDWEB_PRIVATE.acquire_js_reference( $0 );return (o instanceof HTMLCanvasElement) | 0;
             },
             "__extjs_5ecfd7ee5cecc8be26c1e6e3c90ce666901b547c": function($0, $1) {
                 $1 = Module.STDWEB_PRIVATE.to_js($1);Module.STDWEB_PRIVATE.from_js($0, (function(){return ($1). error ;})());
-            },
-            "__extjs_5ef77090a706b94ec2278a7613302d6623659179": function($0, $1, $2, $3, $4, $5) {
-                $0 = Module.STDWEB_PRIVATE.to_js($0);$1 = Module.STDWEB_PRIVATE.to_js($1);$2 = Module.STDWEB_PRIVATE.to_js($2);$3 = Module.STDWEB_PRIVATE.to_js($3);$4 = Module.STDWEB_PRIVATE.to_js($4);$5 = Module.STDWEB_PRIVATE.to_js($5);let canvas = ($0); function update (dt){($1)(dt); window.requestAnimationFrame (update);}function resize (){canvas.width = window.innerWidth ; canvas.height = window.innerHeight ; update (0);}canvas.addEventListener ("mousedown" , (e)=> {($2)();}); canvas.addEventListener ("mouseup" , (e)=> {($3)();}); canvas.addEventListener ("mousemove" , (e)=> {($4)(e.movementX , e.movementY);}); canvas.addEventListener ("mouseout" , (e)=> {($5)();}); window.addEventListener ("resize" , resize); resize ();
             },
             "__extjs_6665489d4099b58ea29d83630ab4c8be80d7387e": function($0, $1) {
                 $1 = Module.STDWEB_PRIVATE.to_js($1);Module.STDWEB_PRIVATE.from_js($0, (function(){return ($1). body ;})());
@@ -549,6 +543,12 @@ Module.STDWEB_PRIVATE.acquire_tmp = function( dummy ) {
             },
             "__extjs_89611721005b3de331324f19bedec5df179862e4": function($0) {
                 var o = Module.STDWEB_PRIVATE.acquire_js_reference( $0 );return (o instanceof CanvasRenderingContext2D) | 0;
+            },
+            "__extjs_93fc43376eb4c850d10102acd0e7309db1ebf9cb": function($0, $1, $2, $3, $4) {
+                $0 = Module.STDWEB_PRIVATE.to_js($0);$1 = Module.STDWEB_PRIVATE.to_js($1);$2 = Module.STDWEB_PRIVATE.to_js($2);$3 = Module.STDWEB_PRIVATE.to_js($3);$4 = Module.STDWEB_PRIVATE.to_js($4);let canvas = ($0); canvas.style.cursor = "grab" ; function update (dt){($1)(dt); window.requestAnimationFrame (update);}function resize (){canvas.width = window.innerWidth ; canvas.height = window.innerHeight ; update (0);}let mouse_down = ($2); let mouse_up = ($3); let mouse_move = ($4); canvas.addEventListener ("mousedown" , (e)=> {console.log ("down" , e.screenX , e.screenY); mouse_down (e.screenX , e.screenY); canvas.style.cursor = "grabbing" ;}); canvas.addEventListener ("mouseup" , (e)=> {mouse_up (); canvas.style.cursor = "grab" ;}); canvas.addEventListener ("mousemove" , (e)=> {mouse_move (e.screenX , e.screenY);}); canvas.addEventListener ("touchstart" , (e)=> {mouse_down (e.touches [0]. screenX , e.touches [0]. screenY);}); canvas.addEventListener ("touchend" , (e)=> {mouse_up ();}); canvas.addEventListener ("touchmove" , (e)=> {mouse_move (e.touches [0]. screenX , e.touches [0]. screenY);}); canvas.addEventListener ("mouseout" , (e)=> {mouse_up ();}); window.addEventListener ("resize" , resize); resize ();
+            },
+            "__extjs_9a5480d0ac5ce27241c56a317ff1b22de9476052": function() {
+                document.body.style.margin = 0 ; let legend = document.createElement ("img"); legend.src = "legend.png" ; legend.style.position = "absolute" ; legend.style.right = 0 ; legend.style.bottom = 0 ; legend.style.margin = "30px" ; legend.style ["pointer-events"]= "none" ; document.body.appendChild (legend); document.body.style.overflow = "hidden" ;
             },
             "__extjs_9f22d4ca7bc938409787341b7db181f8dd41e6df": function($0) {
                 Module.STDWEB_PRIVATE.increment_refcount( $0 );
