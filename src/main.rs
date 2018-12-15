@@ -44,7 +44,7 @@ enum Kind {
 fn main() {
     let canvas = create::<CanvasElement>("canvas", true);
     let image = create::<ImageElement>("img", false);
-    image.set_src("agenta2.png");
+    image.set_src("agenta3.png");
     let ctx = canvas.get_context::<CanvasRenderingContext2d>().unwrap();
     let state = Rc::new(RefCell::new(State::default()));
     let update = {
