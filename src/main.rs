@@ -39,7 +39,7 @@ impl std::default::Default for Kind {
 fn main() {
     let canvas = create::<CanvasElement>("canvas", true);
     let image = create::<ImageElement>("img", false);
-    image.set_src("Agenta2.png");
+    image.set_src("agenta2.png");
     let ctx = canvas.get_context::<CanvasRenderingContext2d>().unwrap();
     let state = Rc::new(RefCell::new(State::default()));
     let update = {
@@ -98,6 +98,14 @@ fn main() {
     };
     js!{ @(no_return)
         document.body.style.margin = 0;
+        let legend = document.createElement("img");
+        legend.src = "legend.png";
+        legend.style.position = "absolute";
+        legend.style.right = 0;
+        legend.style.bottom = 0;
+        legend.style.margin = "30px";
+        legend.style["pointer-events"] = "none";
+        document.body.appendChild(legend);
     }
     js!{ @(no_return)
         let canvas = @{canvas};
